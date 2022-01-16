@@ -1,0 +1,23 @@
+#######################################
+# Syntax Coloring Map Bistable
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Bistable	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+isChanged	KEYWORD2
+getState 	KEYWORD2
+changeDebouncerDelay	KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################
+RISING_EDGE		LITERAL1
+FALLING_EDGE	LITERAL1
+ON				LITERAL1
+OFF				LITERAL1
