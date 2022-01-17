@@ -38,7 +38,6 @@ bool transient2::isChanged(void)
 //			Serial.print("-> 4");
 			// Current_state=state;	// XOR Current_state
 			detected_edge = state==LOW ? FALLING_EDGE : RISING_EDGE ;
-			Update=true;
 			ret = true;
 		}
 //		Serial.print("-> 5");
@@ -57,8 +56,6 @@ bool transient2::isChanged(void)
 */
 uint8_t transient2::getEdge(void)
 {	
-	if(!Update) isChanged();
-	Update=false;
 	return detected_edge;
 }
 
