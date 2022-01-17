@@ -18,8 +18,8 @@ class transient2
 	public:
 		transient2(void);
 		void begin(uint8_t Pin, uint8_t Input_type=INPUT, uint64_t DebouncerDelay=50);
-		uint8_t isChanged();
-		// uint8_t getState();
+		bool isChanged();
+		uint8_t getEdge();
 		void changeDebouncerDelay(uint64_t delay);
 
 		enum EDGE {
@@ -34,6 +34,7 @@ class transient2
 		uint64_t t0;
 		uint64_t delay=50; //ms
     bool Update=false;
+    uint8_t detected_edge;
 		
 };
 

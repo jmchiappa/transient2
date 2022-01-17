@@ -12,15 +12,17 @@ void setup(){
 
 void loop()
 {
-	uint8_t event = Button.isChanged();
-	if( event == transient2::RISING_EDGE ) {
-		digitalWrite(LED_BLUE,HIGH);
-		delay(15);
-		digitalWrite(LED_BLUE,LOW);
-	}
-	if( event == transient2::FALLING_EDGE ) {
-		digitalWrite(LED_RED,HIGH);
-		delay(15);
-		digitalWrite(LED_RED,LOW);
+	if( Button.isChanged() ) {
+		uint8_t event = Button.getEdge();
+		if( event == transient2::RISING_EDGE ) {
+			digitalWrite(LED_BLUE,HIGH);
+			delay(15);
+			digitalWrite(LED_BLUE,LOW);
+		}
+		if( event == transient2::FALLING_EDGE ) {
+			digitalWrite(LED_RED,HIGH);
+			delay(15);
+			digitalWrite(LED_RED,LOW);
+		}
 	}
 }

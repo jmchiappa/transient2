@@ -22,9 +22,9 @@ void transient2::begin(uint8_t Pin, uint8_t Input_type, uint64_t DebouncerDelay)
 
 /* Return true if an expected transition occurs
 */
-uint8_t transient2::isChanged(void)
+bool transient2::isChanged(void)
 {
-	uint8_t ret = NO_CHANGE;
+	bool ret = false;
 
 	uint8_t state = digitalRead(this->PinNumber);
 //	Serial.print("1 "+String(Last_input_state)+" "+String(state)+" "+String(Active_Edge));
@@ -36,8 +36,10 @@ uint8_t transient2::isChanged(void)
 	else if((millis()-t0)>delay) {
 		if(state!=Last_input_state) { // transition occurs
 //			Serial.print("-> 4");
-			Current_state=state;	// XOR Current_state
-			ret = state==LOW ? FALLING_EDGE : RISING_EDGE ;
+			// Current_state=state;	// XOR Current_state
+			detected_edge = state==LOW ? FALLING_EDGE : RISING_EDGE ;
+			Update=true;
+			ret = true;
 		}
 //		Serial.print("-> 5");
 		t0=0;
@@ -46,19 +48,19 @@ uint8_t transient2::isChanged(void)
 
 	//Last_input_state = state;
 //	Serial.println();
-	Update=true;
+	// Update=true;
 
 	return ret; // no change
 }
 
 /* Return current state of bistable variable
 */
-// uint8_t Bistable::getState(void)
-// {	
-// 	if(!Update) isChanged();
-// 	Update=false;
-// 	return Current_state; // no change
-// }
+uint8_t transient2::getEdge(void)
+{	
+	if(!Update) isChanged();
+	Update=false;
+	return detected_edge;
+}
 
 void transient2::changeDebouncerDelay(uint64_t delay)
 {
